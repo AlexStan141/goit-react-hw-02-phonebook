@@ -1,0 +1,11 @@
+.container {
+    border: 1px solid black;
+    width: 400px;
+    height: 150px;
+}
+
+.block {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: block;
+}
