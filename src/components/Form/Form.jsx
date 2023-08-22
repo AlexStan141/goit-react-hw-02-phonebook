@@ -15,7 +15,6 @@ class Form extends React.Component {
 
   handleSubmit = evt => {
     evt.preventDefault();
-    const { name, number } = this.state;
     this.props.onSubmit({ ...this.state });
   };
 
