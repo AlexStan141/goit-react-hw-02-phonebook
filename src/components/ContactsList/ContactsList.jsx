@@ -4,7 +4,6 @@ import { Contact } from 'components/Contact/Contact';
 function filterResults(contacts, filterString) {
   var result = [];
   for (let contact of contacts) {
-    console.log(contact);
     if (contact.name.toLowerCase().includes(filterString.toLowerCase())) {
       result.push(contact);
     }
@@ -12,7 +11,7 @@ function filterResults(contacts, filterString) {
   return result;
 }
 
-export const ContactsList = ({ contacts, filterString }) => {
+export const ContactsList = ({ contacts, filterString, onDeleteElement }) => {
   return (
     <ul>
       {filterResults(contacts, filterString).map((contact, index) => {
@@ -20,6 +19,9 @@ export const ContactsList = ({ contacts, filterString }) => {
           <Contact
             name={contact.name}
             number={contact.number}
+            onButtonClick={() => {
+              onDeleteElement(contact.name);
+            }}
             key={index}
           ></Contact>
         );

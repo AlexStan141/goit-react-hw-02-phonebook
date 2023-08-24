@@ -17,23 +17,48 @@ const INITIAL_STATE = {
 class App extends React.Component {
   state = { ...INITIAL_STATE };
 
+  checkNameExistance(name) {
+    for (let contact of this.state.contacts) {
+      if (contact.name === name) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  deleteElement(name) {
+    this.setState(prevState => {
+      var nextState = { contacts: [], filter: prevState.filter };
+      for (let contact of prevState.contacts) {
+        if (contact.name != name) {
+          nextState.contacts.push(contact);
+        }
+      }
+      return nextState;
+    });
+  }
+
   render() {
     return (
       <>
         <Form
           onSubmit={values => {
-            this.setState(prevState => {
-              var nextState = prevState;
-              nextState.contacts = [
-                ...prevState.contacts,
-                {
-                  id: nanoid(),
-                  name: values.name,
-                  number: values.number,
-                },
-              ];
-              return nextState;
-            });
+            if (!this.checkNameExistance(values.name)) {
+              this.setState(prevState => {
+                var nextState = prevState;
+                nextState.contacts = [
+                  ...prevState.contacts,
+                  {
+                    id: nanoid(),
+                    name: values.name,
+                    number: values.number,
+                  },
+                ];
+                return nextState;
+              });
+            } else {
+              alert(`${values.name} is already in contacts`);
+            }
           }}
         ></Form>
         <SearchFilter
@@ -46,6 +71,18 @@ class App extends React.Component {
         <ContactsList
           contacts={this.state.contacts}
           filterString={this.state.filter}
+          onDeleteElement={name => {
+            // console.log(name);
+            this.setState(prevState => {
+              var nextState = { contacts: [], filter: prevState.filter };
+              for (let contact of prevState.contacts) {
+                if (contact.name != name) {
+                  nextState.contacts.push(contact);
+                }
+              }
+              return nextState;
+            });
+          }}
         ></ContactsList>
       </>
     );
