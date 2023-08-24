@@ -30,7 +30,7 @@ class App extends React.Component {
     this.setState(prevState => {
       var nextState = { contacts: [], filter: prevState.filter };
       for (let contact of prevState.contacts) {
-        if (contact.name != name) {
+        if (contact.name !== name) {
           nextState.contacts.push(contact);
         }
       }
@@ -76,7 +76,7 @@ class App extends React.Component {
             this.setState(prevState => {
               var nextState = { contacts: [], filter: prevState.filter };
               for (let contact of prevState.contacts) {
-                if (contact.name != name) {
+                if (contact.name !== name) {
                   nextState.contacts.push(contact);
                 }
               }
