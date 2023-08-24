@@ -41,6 +41,7 @@ class App extends React.Component {
   render() {
     return (
       <>
+        <h1>Phonebook</h1>
         <Form
           onSubmit={values => {
             if (!this.checkNameExistance(values.name)) {
@@ -61,6 +62,7 @@ class App extends React.Component {
             }
           }}
         ></Form>
+        <h2>Contacts</h2>
         <SearchFilter
           onStringChange={e => {
             this.setState({

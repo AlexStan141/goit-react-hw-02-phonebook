@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Contact } from 'components/Contact/Contact';
+import css from './ContactsList.module.css';
 
 function filterResults(contacts, filterString) {
   var result = [];
@@ -13,7 +15,7 @@ function filterResults(contacts, filterString) {
 
 export const ContactsList = ({ contacts, filterString, onDeleteElement }) => {
   return (
-    <ul>
+    <ul className={css.list}>
       {filterResults(contacts, filterString).map((contact, index) => {
         return (
           <Contact
@@ -30,4 +32,8 @@ export const ContactsList = ({ contacts, filterString, onDeleteElement }) => {
   );
 };
 
-//Cream o metoda contacts.filter(filter)
+ContactsList.propTypes = {
+  // contacts: PropTypes.arrayOf(PropTypes.instanceOf(Contact)),  imi da eroare
+  filterString: PropTypes.string,
+  onDeleteElement: PropTypes.func.isRequired,
+};
