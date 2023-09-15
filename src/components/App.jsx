@@ -74,16 +74,7 @@ class App extends React.Component {
           contacts={this.state.contacts}
           filterString={this.state.filter}
           onDeleteElement={name => {
-            // console.log(name);
-            this.setState(prevState => {
-              var nextState = { contacts: [], filter: prevState.filter };
-              for (let contact of prevState.contacts) {
-                if (contact.name !== name) {
-                  nextState.contacts.push(contact);
-                }
-              }
-              return nextState;
-            });
+            this.deleteElement(name);
           }}
         ></ContactsList>
       </>
